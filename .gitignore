@@ -1,0 +1,11 @@
+# Build
+dist
+extension.zip
+
+# Node
+node_modules
+tsconfig.tsbuildinfo
+.rollup.cache
+
+# General
+.DS_Store

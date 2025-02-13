@@ -42,5 +42,3 @@ jobs:
         with:
           name: Github-Grain-Highlight
           path: extension.zip
-
-      # TODO: Release to chrome web store

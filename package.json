@@ -6,7 +6,8 @@
     "clean": "rm -rf dist && rm -f extension.zip && rm -rf .rollup.cache && rm -rf tsconfig.tsbuildinfo",
     "build": "rollup -c",
     "format": "prettier --write src/**/*.ts",
-    "pack": "zip -r extension.zip manifest.json icon.png dist"
+    "pack": "zip -r extension.zip manifest.json icon.png dist",
+    "lint": "prettier --check src/**/*.ts"
   },
   "author": "spotandjake",
   "license": "MIT",

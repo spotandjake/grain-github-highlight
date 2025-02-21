@@ -18,8 +18,5 @@
         "./dist/content.js"
       ]
     }
-  ],
-  "permissions": [
-    "scripting"
   ]
 }

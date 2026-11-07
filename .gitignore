@@ -3,7 +3,11 @@ dist
 .wxt
 extension-*.zip
 
-# Copied from web-tree-sitter on postinstall
+# Copied from tree-sitter-grain on build hook
+public/highlights.scm
+public/tree-sitter-grain.wasm
+
+# Copied from web-tree-sitter on build hook
 public/web-tree-sitter.wasm
 
 # Node

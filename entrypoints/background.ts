@@ -1,15 +1,10 @@
-export default defineBackground(() => {
+export default defineBackground(async () => {
+  // Dynamically import the correct background script based on the browser environment
   if (import.meta.env.FIREFOX) {
-    void import("../src/background.firefox").then(
-      ({ setupBrowserHighlight }) => {
-        setupBrowserHighlight();
-      },
-    );
+    const { setupBrowserHighlight } = await import("../src/background.firefox");
+    setupBrowserHighlight();
   } else {
-    void import("../src/background.chrome").then(
-      ({ setupBrowserHighlight }) => {
-        setupBrowserHighlight();
-      },
-    );
+    const { setupBrowserHighlight } = await import("../src/background.chrome");
+    setupBrowserHighlight();
   }
 });

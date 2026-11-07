@@ -4,6 +4,10 @@
 ; tokens like "continue", "break", and "void" cannot be matched as anonymous
 ; terminals — use surrounding named nodes instead.
 
+; Neovim: sets 'commentstring' for built-in commenting when treesitter highlights
+; are active (:help treesitter-highlight-commentstring).
+; ((program) @_grain (#set! @_grain bo.commentstring "// %s"))
+
 ; Comments (`//` line, `/* */` block, `/** */` doc)
 (line_comment) @comment @comment.line @spell
 
@@ -123,17 +127,14 @@
   operator: (prefix_operator) @operator)
 
 ; Import/export keywords
-(import_from_clause
+(include_declaration
   "from" @keyword.import)
 
 (foreign_declaration
-  "from" @keyword.import)
+  "from" @keyword)
 
 (provide_declaration
-  (provide_header) @keyword.export)
-
-(incomplete_provide_declaration
-  (provide_header) @keyword.export)
+  "provide" @keyword.export)
 
 ; Keywords (anonymous terminals — excludes query-reserved spellings:
 ; break, continue, void, await, import, …)
@@ -144,6 +145,7 @@
   "wasm"
   "primitive"
   "exception"
+  "abstract"
   "type"
   "enum"
   "record"
@@ -155,8 +157,6 @@
   "is"
   "isnt"
 ] @keyword
-
-(provide_abstract_prefix) @keyword
 
 [
   "use"
@@ -229,15 +229,13 @@
  (#set! priority 105))
 
 ((include_declaration
-  include: (import_include_clause
-    module: (qualified_type_identifier
-      (upper_identifier) @namespace)))
+  module: (qualified_type_identifier
+    (upper_identifier) @namespace))
  (#set! priority 105))
 
 ((include_declaration
-  include: (import_include_clause
-    alias: (qualified_type_identifier
-      (upper_identifier) @namespace)))
+  alias: (qualified_type_identifier
+    (upper_identifier) @namespace))
  (#set! priority 105))
 
 ((module_header
